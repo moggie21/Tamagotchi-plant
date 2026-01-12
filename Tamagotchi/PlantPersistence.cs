@@ -59,5 +59,12 @@ namespace Tamagotchi
             {
             }
         }
+        public void DeleteSaveFile()
+        {
+            if (File.Exists(_filePath))
+            {
+                File.Delete(_filePath);
+            }
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace Tamagotchi
         public double Moisture { get; private set; } // влажность
         public double Nutrition { get; private set; } // питание
         public double Light { get; private set; } // свет
+        public bool IsDead => Moisture <= 0 && Nutrition <= 0 && Light <= 0; // смерть
 
         // время последнего обновления состояния
         public DateTime LastUpdate { get; private set; }

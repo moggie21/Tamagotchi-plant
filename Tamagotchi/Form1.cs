@@ -49,6 +49,21 @@ namespace Tamagotchi
             //    $"Свет: {_plant?.Light:F1}",
             //    "Отладка: Деградация при загрузке"
             //);
+            
+            // проверка на смерть растения вне игры
+            if (_plant.IsDead)
+            {
+                _decayTimer.Stop();
+                MessageBox.Show(
+                    "Твоё растение умерло... 😢\nНачни заново!",
+                    "Увы...",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                _persistence.DeleteSaveFile();
+                _plant = null;
+                return;
+            }
 
             UpdatePlantUI();
 
@@ -69,6 +84,25 @@ namespace Tamagotchi
             light_progressBar.Value = light;
 
             plant_pictureBox.BackColor = _plant.GetBackgroundColor();
+
+            // проверка на смерть растения во время игры
+            if (_plant.IsDead)
+            {
+                _decayTimer.Stop();
+
+                MessageBox.Show(
+                    "Твоё растение умерло... 😢\nНачни заново!",
+                    "Увы...",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                start_panel.Visible = true;
+                main_panel.Visible = false;
+                _persistence.DeleteSaveFile();
+                _plant = null;
+                return;
+            }
         }
 
         private void exit_btn_Click(object sender, EventArgs e)
@@ -117,15 +151,13 @@ namespace Tamagotchi
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_plant != null)
+            if (_plant != null && !_plant.IsDead)
             {
-                // сохраняется актуальное состояние
                 var minutesPassed = (DateTime.Now - _plant.LastUpdate).TotalMinutes;
                 if (minutesPassed > 0)
                 {
                     _plant.ApplyDecay(minutesPassed);
                 }
-
                 _persistence.Save(_plant);
             }
 
