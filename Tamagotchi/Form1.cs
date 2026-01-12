@@ -8,9 +8,12 @@ namespace Tamagotchi
         private System.Windows.Forms.Timer _fadeTimer;
         private FadeEffect _fadeEffect;
         private System.Windows.Forms.Timer _decayTimer;
+        private PlantPersistence _persistence;
         public Form1()
         {
             InitializeComponent();
+
+            _persistence = new PlantPersistence();
 
             // таймер для анимации
             _fadeTimer = new System.Windows.Forms.Timer { Interval = 40 };
@@ -18,12 +21,26 @@ namespace Tamagotchi
             _fadeEffect = new FadeEffect(_fadeTimer, Color.PaleGoldenrod, Color.SeaGreen);
 
             // таймер для деградации параметров
-            _decayTimer = new System.Windows.Forms.Timer { Interval = 60_000 };
+            _decayTimer = new System.Windows.Forms.Timer { Interval = 1_000 };
             _decayTimer.Tick += DecayTimer_Tick;
+
+            this.FormClosing += Form1_FormClosing;
         }
 
         private void myPlant_btn_Click(object sender, EventArgs e)
         {
+            if (_plant == null)
+            {
+                _plant = _persistence.Load() ?? new Plant();
+
+                // деградация за пропущенное время
+                var minutesPassed = (DateTime.Now - _plant.LastUpdate).TotalMinutes;
+                if (minutesPassed > 0)
+                {
+                    _plant.ApplyDecay(minutesPassed);
+                }
+            }
+
             _plant ??= new Plant();
             UpdatePlantUI();
 
@@ -88,6 +105,24 @@ namespace Tamagotchi
             _plant.ApplyDecay(1); // именно 1 минута
 
             UpdatePlantUI();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_plant != null)
+            {
+                // сохраняется актуальное состояние
+                var minutesPassed = (DateTime.Now - _plant.LastUpdate).TotalMinutes;
+                if (minutesPassed > 0)
+                {
+                    _plant.ApplyDecay(minutesPassed);
+                }
+
+                _persistence.Save(_plant);
+            }
+
+            _decayTimer?.Stop();
+            _fadeTimer?.Stop();
         }
     }
 }
