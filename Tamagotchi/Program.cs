@@ -1,4 +1,4 @@
-namespace Sudoku
+namespace Tamagotchi
 {
     internal static class Program
     {
