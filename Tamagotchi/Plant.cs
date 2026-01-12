@@ -45,9 +45,9 @@ namespace Tamagotchi
         // функция изменения параметров за прошедшее время (в минутах)
         public void ApplyDecay(double minutesPassed)
         {
-            Moisture = Math.Max(0, Moisture - 0.5 * minutesPassed);
-            Nutrition = Math.Max(0, Nutrition - 0.25 * minutesPassed);
-            Light = Math.Max(0, Light - 0.35 * minutesPassed);
+            Moisture = Math.Max(0, Moisture - 1 * minutesPassed);
+            Nutrition = Math.Max(0, Nutrition - 0.5 * minutesPassed);
+            Light = Math.Max(0, Light - 0.75 * minutesPassed);
             LastUpdate = DateTime.Now;
         }
 
@@ -61,7 +61,7 @@ namespace Tamagotchi
         {
             var min = Math.Min(Moisture, Math.Min(Nutrition, Light));
             if (min >= 90) return PlantState.Blooming;
-            if (min >= 30) return PlantState.Healthy;
+            if (min >= 40) return PlantState.Healthy;
             if (min >= 10) return PlantState.Wilting;
             return PlantState.Dead;
         }
