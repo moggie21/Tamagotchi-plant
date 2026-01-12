@@ -21,7 +21,7 @@ namespace Tamagotchi
             _fadeEffect = new FadeEffect(_fadeTimer, Color.PaleGoldenrod, Color.SeaGreen);
 
             // таймер для деградации параметров
-            _decayTimer = new System.Windows.Forms.Timer { Interval = 1_000 };
+            _decayTimer = new System.Windows.Forms.Timer { Interval = 60_000 };
             _decayTimer.Tick += DecayTimer_Tick;
 
             this.FormClosing += Form1_FormClosing;
@@ -29,6 +29,7 @@ namespace Tamagotchi
 
         private void myPlant_btn_Click(object sender, EventArgs e)
         {
+            //double minutesPassed = 0;
             if (_plant == null)
             {
                 _plant = _persistence.Load() ?? new Plant();
@@ -41,7 +42,14 @@ namespace Tamagotchi
                 }
             }
 
-            _plant ??= new Plant();
+            //MessageBox.Show(
+            //    $"Прошло минут: {minutesPassed:F1}\n" +
+            //    $"Влажность: {_plant?.Moisture:F1}\n" +
+            //    $"Питание: {_plant?.Nutrition:F1}\n" +
+            //    $"Свет: {_plant?.Light:F1}",
+            //    "Отладка: Деградация при загрузке"
+            //);
+
             UpdatePlantUI();
 
             start_panel.Visible = false;

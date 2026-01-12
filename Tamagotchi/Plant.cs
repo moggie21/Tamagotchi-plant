@@ -45,9 +45,9 @@ namespace Tamagotchi
         // функция изменения параметров за прошедшее время (в минутах)
         public void ApplyDecay(double minutesPassed)
         {
-            Moisture = Math.Max(0, Moisture - 1 * minutesPassed);
-            Nutrition = Math.Max(0, Nutrition - 0.5 * minutesPassed);
-            Light = Math.Max(0, Light - 0.75 * minutesPassed);
+            Moisture = Math.Max(0, Moisture - 0.5 * minutesPassed);
+            Nutrition = Math.Max(0, Nutrition - 0.25 * minutesPassed);
+            Light = Math.Max(0, Light - 0.35 * minutesPassed);
             LastUpdate = DateTime.Now;
         }
 
