@@ -27,9 +27,9 @@ namespace Tamagotchi
         // конструктор: новое здоровое растение
         public Plant()
         {
-            Moisture = 100;
-            Nutrition = 100;
-            Light = 100;
+            Moisture = 80;
+            Nutrition = 80;
+            Light = 80;
             LastUpdate = DateTime.Now;
         }
 
@@ -52,18 +52,31 @@ namespace Tamagotchi
         }
 
         // действия пользователя
-        public void Water() => Moisture = Math.Min(100, Moisture + 20);
-        public void Feed() => Nutrition = Math.Min(100, Nutrition + 20);
-        public void GiveLight() => Light = Math.Min(100, Light + 20);
+        public void Water() => Moisture = Math.Min(100, Moisture + 15);
+        public void Feed() => Nutrition = Math.Min(100, Nutrition + 15);
+        public void GiveLight() => Light = Math.Min(100, Light + 15);
 
         // определяет текущее состояние для визуализации
         public PlantState GetVisualState()
         {
             var min = Math.Min(Moisture, Math.Min(Nutrition, Light));
-            if (min >= 70) return PlantState.Blooming;
+            if (min >= 90) return PlantState.Blooming;
             if (min >= 30) return PlantState.Healthy;
             if (min >= 10) return PlantState.Wilting;
             return PlantState.Dead;
+        }
+
+        // изменение picture box в зависимости от состояния. пока что в цветах, потом заменю на спрайты
+        public Color GetBackgroundColor()
+        {
+            return GetVisualState() switch
+            {
+                PlantState.Blooming => Color.Pink,
+                PlantState.Healthy => Color.Green,
+                PlantState.Wilting => Color.Yellow,
+                PlantState.Dead => Color.Black,
+                _ => Color.Gray
+            };
         }
 
         // нужно для обновления прогресс баров

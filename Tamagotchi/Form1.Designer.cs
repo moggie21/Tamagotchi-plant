@@ -30,9 +30,12 @@
         {
             start_panel = new Panel();
             label1 = new Label();
-            exit_btn = new Button();
             myPlant_btn = new Button();
+            exit_btn = new Button();
             main_panel = new Panel();
+            addLight_label = new Label();
+            addNutrition_label = new Label();
+            addMoisture_label = new Label();
             backMenu_label = new Label();
             label5 = new Label();
             label4 = new Label();
@@ -73,20 +76,6 @@
             label1.TabIndex = 2;
             label1.Text = "~";
             // 
-            // exit_btn
-            // 
-            exit_btn.BackColor = Color.PaleGoldenrod;
-            exit_btn.Cursor = Cursors.Hand;
-            exit_btn.FlatStyle = FlatStyle.Flat;
-            exit_btn.Font = new Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            exit_btn.Location = new Point(162, 293);
-            exit_btn.Name = "exit_btn";
-            exit_btn.Size = new Size(372, 63);
-            exit_btn.TabIndex = 1;
-            exit_btn.Text = "Выйти";
-            exit_btn.UseVisualStyleBackColor = false;
-            exit_btn.Click += exit_btn_Click;
-            // 
             // myPlant_btn
             // 
             myPlant_btn.BackColor = Color.PaleGoldenrod;
@@ -101,9 +90,26 @@
             myPlant_btn.UseVisualStyleBackColor = false;
             myPlant_btn.Click += myPlant_btn_Click;
             // 
+            // exit_btn
+            // 
+            exit_btn.BackColor = Color.PaleGoldenrod;
+            exit_btn.Cursor = Cursors.Hand;
+            exit_btn.FlatStyle = FlatStyle.Flat;
+            exit_btn.Font = new Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            exit_btn.Location = new Point(162, 293);
+            exit_btn.Name = "exit_btn";
+            exit_btn.Size = new Size(372, 63);
+            exit_btn.TabIndex = 1;
+            exit_btn.Text = "Выйти";
+            exit_btn.UseVisualStyleBackColor = false;
+            exit_btn.Click += exit_btn_Click;
+            // 
             // main_panel
             // 
             main_panel.BackColor = Color.SeaGreen;
+            main_panel.Controls.Add(addLight_label);
+            main_panel.Controls.Add(addNutrition_label);
+            main_panel.Controls.Add(addMoisture_label);
             main_panel.Controls.Add(backMenu_label);
             main_panel.Controls.Add(label5);
             main_panel.Controls.Add(label4);
@@ -122,6 +128,42 @@
             main_panel.Size = new Size(711, 618);
             main_panel.TabIndex = 3;
             main_panel.Visible = false;
+            // 
+            // addLight_label
+            // 
+            addLight_label.AutoSize = true;
+            addLight_label.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            addLight_label.ForeColor = Color.PaleGoldenrod;
+            addLight_label.Location = new Point(455, 91);
+            addLight_label.Name = "addLight_label";
+            addLight_label.Size = new Size(44, 23);
+            addLight_label.TabIndex = 14;
+            addLight_label.Text = "+15";
+            addLight_label.Visible = false;
+            // 
+            // addNutrition_label
+            // 
+            addNutrition_label.AutoSize = true;
+            addNutrition_label.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            addNutrition_label.ForeColor = Color.PaleGoldenrod;
+            addNutrition_label.Location = new Point(455, 62);
+            addNutrition_label.Name = "addNutrition_label";
+            addNutrition_label.Size = new Size(44, 23);
+            addNutrition_label.TabIndex = 13;
+            addNutrition_label.Text = "+15";
+            addNutrition_label.Visible = false;
+            // 
+            // addMoisture_label
+            // 
+            addMoisture_label.AutoSize = true;
+            addMoisture_label.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            addMoisture_label.ForeColor = Color.PaleGoldenrod;
+            addMoisture_label.Location = new Point(455, 33);
+            addMoisture_label.Name = "addMoisture_label";
+            addMoisture_label.Size = new Size(44, 23);
+            addMoisture_label.TabIndex = 12;
+            addMoisture_label.Text = "+15";
+            addMoisture_label.Visible = false;
             // 
             // backMenu_label
             // 
@@ -212,6 +254,7 @@
             light_btn.TabIndex = 3;
             light_btn.Text = "Дать свет";
             light_btn.UseVisualStyleBackColor = false;
+            light_btn.Click += light_btn_Click;
             // 
             // feed_btn
             // 
@@ -225,6 +268,7 @@
             feed_btn.TabIndex = 2;
             feed_btn.Text = "Подкормить";
             feed_btn.UseVisualStyleBackColor = false;
+            feed_btn.Click += feed_btn_Click;
             // 
             // water_btn
             // 
@@ -238,10 +282,11 @@
             water_btn.TabIndex = 1;
             water_btn.Text = "Полить";
             water_btn.UseVisualStyleBackColor = false;
+            water_btn.Click += water_btn_Click;
             // 
             // plant_pictureBox
             // 
-            plant_pictureBox.BackColor = Color.PaleGoldenrod;
+            plant_pictureBox.BackColor = Color.Gray;
             plant_pictureBox.Location = new Point(247, 221);
             plant_pictureBox.Name = "plant_pictureBox";
             plant_pictureBox.Size = new Size(200, 200);
@@ -286,5 +331,8 @@
         private Label label3;
         private Label label5;
         private Label backMenu_label;
+        private Label addMoisture_label;
+        private Label addLight_label;
+        private Label addNutrition_label;
     }
 }
