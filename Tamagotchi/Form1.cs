@@ -5,9 +5,16 @@ namespace Tamagotchi
     public partial class Form1 : Form
     {
         private Plant? _plant;
+        private System.Windows.Forms.Timer _fadeTimer;
+        private FadeEffect _fadeEffect;
         public Form1()
         {
             InitializeComponent();
+
+            // таймер для анимации
+            _fadeTimer = new System.Windows.Forms.Timer { Interval = 30 };
+            // эффект затухания: от PaleGoldenrod к фону SeaGreen
+            _fadeEffect = new FadeEffect(_fadeTimer, Color.PaleGoldenrod, Color.SeaGreen);
         }
 
         private void myPlant_btn_Click(object sender, EventArgs e)
@@ -46,21 +53,21 @@ namespace Tamagotchi
         private void water_btn_Click(object sender, EventArgs e)
         {
             _plant?.Water();
-            addMoisture_label.Visible = true;
+            _fadeEffect.Start(addMoisture_label);
             UpdatePlantUI();
         }
 
         private void feed_btn_Click(object sender, EventArgs e)
         {
             _plant?.Feed();
-            addNutrition_label.Visible = true;
+            _fadeEffect.Start(addNutrition_label);
             UpdatePlantUI();
         }
 
         private void light_btn_Click(object sender, EventArgs e)
         {
             _plant?.GiveLight();
-            addLight_label.Visible = true;
+            _fadeEffect.Start(addLight_label);
             UpdatePlantUI();
         }
     }
