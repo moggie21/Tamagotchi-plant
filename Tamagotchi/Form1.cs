@@ -14,6 +14,11 @@ namespace Tamagotchi
         {
             InitializeComponent();
 
+            plantName_label.Location = new Point(
+                (this.ClientSize.Width - plantName_label.Width) / 2,
+                plantName_label.Location.Y
+            );
+
             // загрузка спрайты
             try
             {
@@ -48,9 +53,23 @@ namespace Tamagotchi
         private void myPlant_btn_Click(object sender, EventArgs e)
         {
             //double minutesPassed = 0;
+
             if (_plant == null)
             {
-                _plant = _persistence.Load() ?? new Plant();
+                _plant = _persistence.Load();
+
+                if (_plant == null)
+                {
+                    using var nameForm = new PlantNameForm();
+                    if (nameForm.ShowDialog() == DialogResult.OK)
+                    {
+                        _plant = new Plant(nameForm.PlantName);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
 
                 // деградация за пропущенное время
                 var minutesPassed = (DateTime.Now - _plant.LastUpdate).TotalMinutes;
@@ -67,7 +86,7 @@ namespace Tamagotchi
             //    $"Свет: {_plant?.Light:F1}",
             //    "Отладка: Деградация при загрузке"
             //);
-            
+
             // проверка на смерть растения вне игры
             if (_plant.IsDead)
             {
@@ -94,6 +113,8 @@ namespace Tamagotchi
         private void UpdatePlantUI()
         {
             if (_plant == null) return;
+
+            plantName_label.Text = _plant.PlantName;
 
             // обновление прогресс баров
             var (moisture, nutrition, light) = _plant.GetProgressValues();
@@ -191,6 +212,24 @@ namespace Tamagotchi
 
             _decayTimer?.Stop();
             _fadeTimer?.Stop();
+        }
+
+        private void killButton_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Уверены, что хотите сжечь кактус?",
+                "Подтверждение",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                _persistence.DeleteSaveFile();
+                _plant = null;
+                start_panel.Visible = true;
+                main_panel.Visible = false;
+            }
         }
     }
 }

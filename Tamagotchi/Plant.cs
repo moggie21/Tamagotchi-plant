@@ -21,26 +21,29 @@ namespace Tamagotchi
         public double Nutrition { get; private set; } // питание
         public double Light { get; private set; } // свет
         public bool IsDead => Moisture <= 0 && Nutrition <= 0 && Light <= 0; // смерть
+        public string PlantName { get; private set; } // имя
 
         // время последнего обновления состояния
         public DateTime LastUpdate { get; private set; }
 
         // конструктор: новое здоровое растение
-        public Plant()
+        public Plant(string plantName)
         {
-            Moisture = 0;
+            PlantName = plantName;
+            Moisture = 5;
             Nutrition = 20;
             Light = 20;
             LastUpdate = DateTime.Now;
         }
 
         // конструктор для загрузки из сохранённого состояния
-        public Plant(double moisture, double nutrition, double light, DateTime lastUpdate)
+        public Plant(double moisture, double nutrition, double light, DateTime lastUpdate, string? plantName)
         {
             Moisture = Math.Max(0, Math.Min(100, moisture));
             Nutrition = Math.Max(0, Math.Min(100, nutrition));
             Light = Math.Max(0, Math.Min(100, light));
             LastUpdate = lastUpdate;
+            PlantName = plantName ?? "Кактус";
         }
 
         // функция изменения параметров за прошедшее время (в минутах)

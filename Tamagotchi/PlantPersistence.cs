@@ -26,7 +26,7 @@ namespace Tamagotchi
                 var data = JsonSerializer.Deserialize<PlantStateData>(json);
                 if (data != null)
                 {
-                    return new Plant(data.Moisture, data.Nutrition, data.Light, data.LastUpdate);
+                    return new Plant(data.Moisture, data.Nutrition, data.Light, data.LastUpdate, data.PlantName);
                 }
             }
             catch
@@ -45,7 +45,8 @@ namespace Tamagotchi
                     Moisture = plant.Moisture,
                     Nutrition = plant.Nutrition,
                     Light = plant.Light,
-                    LastUpdate = plant.LastUpdate
+                    LastUpdate = plant.LastUpdate,
+                    PlantName = plant.PlantName
                 };
 
                 var folder = Path.GetDirectoryName(_filePath)!;

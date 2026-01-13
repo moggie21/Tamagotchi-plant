@@ -12,5 +12,6 @@ namespace Tamagotchi
         public double Nutrition { get; set; }
         public double Light { get; set; }
         public DateTime LastUpdate { get; set; }
+        public string? PlantName { get; set; }
     }
 }

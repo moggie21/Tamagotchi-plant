@@ -33,6 +33,7 @@
             myPlant_btn = new Button();
             exit_btn = new Button();
             main_panel = new Panel();
+            killButton = new Button();
             addLight_label = new Label();
             addNutrition_label = new Label();
             addMoisture_label = new Label();
@@ -107,6 +108,7 @@
             // main_panel
             // 
             main_panel.BackColor = Color.DarkSlateGray;
+            main_panel.Controls.Add(killButton);
             main_panel.Controls.Add(addLight_label);
             main_panel.Controls.Add(addNutrition_label);
             main_panel.Controls.Add(addMoisture_label);
@@ -128,6 +130,20 @@
             main_panel.Size = new Size(711, 618);
             main_panel.TabIndex = 3;
             main_panel.Visible = false;
+            // 
+            // killButton
+            // 
+            killButton.BackColor = Color.Orange;
+            killButton.Cursor = Cursors.Hand;
+            killButton.FlatStyle = FlatStyle.Flat;
+            killButton.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            killButton.Location = new Point(583, 33);
+            killButton.Name = "killButton";
+            killButton.Size = new Size(97, 32);
+            killButton.TabIndex = 15;
+            killButton.Text = "Сжечь";
+            killButton.UseVisualStyleBackColor = false;
+            killButton.Click += killButton_Click;
             // 
             // addLight_label
             // 
@@ -179,7 +195,7 @@
             // 
             // plantName_label
             // 
-            plantName_label.AutoSize = true;
+            plantName_label.Anchor = AnchorStyles.None;
             plantName_label.Font = new Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             plantName_label.ForeColor = Color.PaleGoldenrod;
             plantName_label.Location = new Point(274, 174);
@@ -187,6 +203,7 @@
             plantName_label.Size = new Size(147, 27);
             plantName_label.TabIndex = 10;
             plantName_label.Text = "Мой кактус";
+            plantName_label.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label4
             // 
@@ -287,7 +304,7 @@
             // plant_pictureBox
             // 
             plant_pictureBox.BackColor = Color.Transparent;
-            plant_pictureBox.Location = new Point(247, 221);
+            plant_pictureBox.Location = new Point(256, 221);
             plant_pictureBox.Name = "plant_pictureBox";
             plant_pictureBox.Size = new Size(200, 200);
             plant_pictureBox.TabIndex = 0;
@@ -334,5 +351,6 @@
         private Label addMoisture_label;
         private Label addLight_label;
         private Label addNutrition_label;
+        private Button killButton;
     }
 }
