@@ -28,9 +28,9 @@ namespace Tamagotchi
         // конструктор: новое здоровое растение
         public Plant()
         {
-            Moisture = 80;
-            Nutrition = 80;
-            Light = 80;
+            Moisture = 0;
+            Nutrition = 20;
+            Light = 20;
             LastUpdate = DateTime.Now;
         }
 

@@ -9,9 +9,27 @@ namespace Tamagotchi
         private FadeEffect _fadeEffect;
         private System.Windows.Forms.Timer _decayTimer;
         private PlantPersistence _persistence;
+        private Dictionary<PlantState, Image> _plantSprites = new();
         public Form1()
         {
             InitializeComponent();
+
+            // загрузка спрайты
+            try
+            {
+                var baseDir = Path.GetDirectoryName(Application.ExecutablePath)!;
+                var imagesDir = Path.Combine(baseDir, "Images");
+
+                _plantSprites[PlantState.Blooming] = Properties.Resources.plant_blooming;
+                _plantSprites[PlantState.Healthy] = Properties.Resources.plant_healthy;
+                _plantSprites[PlantState.Wilting] = Properties.Resources.plant_wilting;
+                _plantSprites[PlantState.Dead] = Properties.Resources.plant_dead;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки спрайтов: {ex.Message}", "Внимание",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
             _persistence = new PlantPersistence();
 
@@ -83,7 +101,17 @@ namespace Tamagotchi
             nutrition_progressBar.Value = nutrition;
             light_progressBar.Value = light;
 
-            plant_pictureBox.BackColor = _plant.GetBackgroundColor();
+            var state = _plant.GetVisualState();
+            if (_plantSprites.TryGetValue(state, out var sprite))
+            {
+                plant_pictureBox.Image = sprite;
+            }
+            else
+            {
+                // если спрайта нет то используется цвет
+                plant_pictureBox.Image = null;
+                plant_pictureBox.BackColor = _plant.GetBackgroundColor();
+            }
 
             // проверка на смерть растения во время игры
             if (_plant.IsDead)

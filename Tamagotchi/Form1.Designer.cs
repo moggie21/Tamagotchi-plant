@@ -37,7 +37,7 @@
             addNutrition_label = new Label();
             addMoisture_label = new Label();
             backMenu_label = new Label();
-            label5 = new Label();
+            plantName_label = new Label();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -55,7 +55,7 @@
             // 
             // start_panel
             // 
-            start_panel.BackColor = Color.SeaGreen;
+            start_panel.BackColor = Color.DarkSlateGray;
             start_panel.Controls.Add(label1);
             start_panel.Controls.Add(myPlant_btn);
             start_panel.Controls.Add(exit_btn);
@@ -86,7 +86,7 @@
             myPlant_btn.Name = "myPlant_btn";
             myPlant_btn.Size = new Size(372, 63);
             myPlant_btn.TabIndex = 0;
-            myPlant_btn.Text = "Моё растение";
+            myPlant_btn.Text = "Мой кактус";
             myPlant_btn.UseVisualStyleBackColor = false;
             myPlant_btn.Click += myPlant_btn_Click;
             // 
@@ -106,12 +106,12 @@
             // 
             // main_panel
             // 
-            main_panel.BackColor = Color.SeaGreen;
+            main_panel.BackColor = Color.DarkSlateGray;
             main_panel.Controls.Add(addLight_label);
             main_panel.Controls.Add(addNutrition_label);
             main_panel.Controls.Add(addMoisture_label);
             main_panel.Controls.Add(backMenu_label);
-            main_panel.Controls.Add(label5);
+            main_panel.Controls.Add(plantName_label);
             main_panel.Controls.Add(label4);
             main_panel.Controls.Add(label3);
             main_panel.Controls.Add(label2);
@@ -177,16 +177,16 @@
             backMenu_label.Text = "<- Назад в меню";
             backMenu_label.Click += backMenu_label_Click;
             // 
-            // label5
+            // plantName_label
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.PaleGoldenrod;
-            label5.Location = new Point(253, 167);
-            label5.Name = "label5";
-            label5.Size = new Size(184, 27);
-            label5.TabIndex = 10;
-            label5.Text = "Моё растение";
+            plantName_label.AutoSize = true;
+            plantName_label.Font = new Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            plantName_label.ForeColor = Color.PaleGoldenrod;
+            plantName_label.Location = new Point(274, 174);
+            plantName_label.Name = "plantName_label";
+            plantName_label.Size = new Size(147, 27);
+            plantName_label.TabIndex = 10;
+            plantName_label.Text = "Мой кактус";
             // 
             // label4
             // 
@@ -286,7 +286,7 @@
             // 
             // plant_pictureBox
             // 
-            plant_pictureBox.BackColor = Color.Gray;
+            plant_pictureBox.BackColor = Color.Transparent;
             plant_pictureBox.Location = new Point(247, 221);
             plant_pictureBox.Name = "plant_pictureBox";
             plant_pictureBox.Size = new Size(200, 200);
@@ -329,7 +329,7 @@
         private Label label2;
         private Label label4;
         private Label label3;
-        private Label label5;
+        private Label plantName_label;
         private Label backMenu_label;
         private Label addMoisture_label;
         private Label addLight_label;
